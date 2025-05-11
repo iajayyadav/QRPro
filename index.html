@@ -121,7 +121,11 @@
 
   <div id="qrcode"></div>
 </div>
-
+<script>
+  function toggleMenu() {
+    document.getElementById('nav-links').classList.toggle('active');
+  }
+</script>
 <script>
   const qrCode = new QRCodeStyling({
     width: 256,
