@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pro QR Code Generator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/qr-code-styling/lib/qr-code-styling.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #1f1c2c, #928dab);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      color: #fff;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      animation: fadeInDown 1s ease;
+    }
+    .container {
+      background: #2a2a40;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+      animation: fadeInUp 1s ease;
+      text-align: center;
+      width: 90%;
+      max-width: 450px;
+    }
+    select, input {
+      padding: 12px;
+      width: 100%;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+      margin-bottom: 15px;
+    }
+    .multi-input { display: none; }
+    button {
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(to right, #0072ff, #00c6ff);
+      color: #fff;
+      font-weight: 600;
+      margin: 5px;
+      transition: transform 0.2s ease;
+    }
+    button:hover { transform: scale(1.05); }
+    #qrcode { margin-top: 20px; animation: fadeIn 1s ease; display: none; }
+    @keyframes fadeInDown {
+      from {opacity: 0; transform: translateY(-20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    @keyframes fadeInUp {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+  </style>
+</head>
+<body>
+<div id="navbarContainer"></div>
+<script>
+  fetch("navbar.html")
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById("navbarContainer").innerHTML = data;
+    });
+</script>
+
+<h1>QR Code Generator</h1>
+<div class="container">
+  <select id="type" onchange="showInputs()">
+    <option value="url">URL</option>
+    <option value="text">Plain Text</option>
+    <option value="phone">Phone Number</option>
+    <option value="email">Email</option>
+    <option value="vcard">vCard (Contact)</option>
+    <option value="wifi">Wi-Fi Credentials</option>
+  </select>
+
+  <div id="input-fields">
+    <input type="text" id="main" placeholder="Enter data here" class="multi-input"/>
+  </div>
+
+  <div id="vcard-fields" class="multi-input">
+    <input type="text" id="vname" placeholder="Full Name">
+    <input type="text" id="vphone" placeholder="Phone">
+    <input type="email" id="vemail" placeholder="Email">
+  </div>
+
+  <div id="wifi-fields" class="multi-input">
+    <input type="text" id="ssid" placeholder="Wi-Fi SSID">
+    <input type="text" id="wpass" placeholder="Wi-Fi Password">
+    <select id="encryption">
+      <option value="WPA">WPA/WPA2</option>
+      <option value="WEP">WEP</option>
+      <option value="nopass">None</option>
+    </select>
+  </div>
+
+  <button onclick="generateQRCode()">Generate</button>
+  <button onclick="downloadQRCode('png')">Download PNG</button>
+  <button onclick="downloadQRCode('svg')">Download SVG</button>
+  <button onclick="downloadQRCode('pdf')">Download PDF</button>
+
+  <div id="qrcode"></div>
+</div>
+
+<script>
+  const qrCode = new QRCodeStyling({
+    width: 256,
+    height: 256,
+    type: "svg",
+    data: "",
+    image: "", // Add logo if needed
+    dotsOptions: {
+      color: "#000",
+      type: "rounded"
+    },
+    backgroundOptions: {
+      color: "#ffffff"
+    },
+    imageOptions: {
+      crossOrigin: "anonymous",
+      margin: 10
+    }
+  });
+
+  function showInputs() {
+    const type = document.getElementById("type").value;
+    document.getElementById("input-fields").style.display = 'none';
+    document.querySelectorAll('.multi-input').forEach(e => e.style.display = 'none');
+
+    if (['url', 'text', 'phone', 'email'].includes(type)) {
+      document.getElementById("main").placeholder = `Enter ${type}`;
+      document.getElementById("main").value = '';
+      document.getElementById("input-fields").style.display = 'block';
+      document.getElementById("main").style.display = 'block';
+    } else if (type === 'vcard') {
+      document.getElementById("vcard-fields").style.display = 'block';
+    } else if (type === 'wifi') {
+      document.getElementById("wifi-fields").style.display = 'block';
+    }
+  }
+
+  function getFormattedData() {
+    const type = document.getElementById("type").value;
+    const main = document.getElementById("main").value.trim();
+
+    switch(type) {
+      case 'url':
+        return main.startsWith("http") ? main : "https://" + main;
+      case 'text':
+        return main;
+      case 'phone':
+        return `tel:${main}`;
+      case 'email':
+        return `mailto:${main}`;
+      case 'vcard':
+        const name = document.getElementById("vname").value.trim();
+        const phone = document.getElementById("vphone").value.trim();
+        const email = document.getElementById("vemail").value.trim();
+        return `BEGIN:VCARD\nVERSION:3.0\nFN:${name}\nTEL:${phone}\nEMAIL:${email}\nEND:VCARD`;
+      case 'wifi':
+        const ssid = document.getElementById("ssid").value.trim();
+        const pass = document.getElementById("wpass").value.trim();
+        const enc = document.getElementById("encryption").value;
+        return `WIFI:S:${ssid};T:${enc};P:${pass};;`;
+      default:
+        return "";
+    }
+  }
+
+  function generateQRCode() {
+    const data = getFormattedData();
+    if (!data) {
+      alert("Please fill in the required fields.");
+      return;
+    }
+
+    qrCode.update({ data: data });
+    const qrContainer = document.getElementById("qrcode");
+    qrContainer.innerHTML = "";
+    qrCode.append(qrContainer);
+    qrContainer.style.display = "block";
+  }
+
+async function downloadQRCode(type) {
+  if (!document.querySelector("#qrcode svg, #qrcode canvas")) {
+    alert("Please generate the QR code first.");
+    return;
+  }
+
+  const qrContainer = document.getElementById("qrcode");
+
+  if (type === 'pdf') {
+    const originalType = qrCode._options.type;
+    const originalData = getFormattedData();
+
+    // Switch to canvas for PDF export
+    qrCode.update({ type: 'canvas', data: originalData });
+    qrContainer.innerHTML = '';
+    await qrCode.append(qrContainer);
+
+    // Give canvas some time to render
+    setTimeout(() => {
+      const canvas = qrContainer.querySelector("canvas");
+      if (canvas) {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        // Make sure canvas is rendered before converting
+        const imgData = canvas.toDataURL("image/png");
+        doc.addImage(imgData, 'PNG', 10, 10, 180, 180);
+        doc.save("qr_code.pdf");
+      } else {
+        alert("Canvas not rendered — cannot export PDF.");
+      }
+
+      // Restore original QR display (e.g., SVG)
+      qrCode.update({ type: originalType, data: originalData });
+      qrContainer.innerHTML = '';
+      qrCode.append(qrContainer);
+
+    }, 300); // adjust if needed (300ms is generally safe)
+  } else {
+    qrCode.download({ name: "qr_code", extension: type });
+  }
+}
+
+
+
+  showInputs();
+</script>
+</body>
+</html>
