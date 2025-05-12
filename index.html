@@ -24,6 +24,7 @@
     h1 {
       font-size: 2.5rem;
       margin-bottom: 20px;
+      margin-top: 100px;
       animation: fadeInDown 1s ease;
     }
     .container {
@@ -42,8 +43,31 @@
       font-size: 16px;
       border-radius: 8px;
       border: none;
-      margin-bottom: 15px;
+      margin: 15px;
     }
+    input[type="color"]{
+      height: 30px;
+      width: 50px;
+      padding: .5%;
+    }
+    input[type="file"]{
+      border: 1px solid white;
+    }
+    input[type=file]::file-selector-button {
+    background-color: #fff;
+    color: #000;
+    border: 0px;
+    border-right: 1px solid #e5e5e5;
+    padding: 10px 15px;
+    margin-right: 20px;
+    transition: .5s;
+  }
+
+input[type=file]::file-selector-button:hover {
+  background-color: #8dc4fb;
+  border: 0px;
+  border-right: 1px solid #e5e5e5;
+}
     .multi-input { display: none; }
     button {
       padding: 12px 24px;
@@ -96,6 +120,8 @@
 
   <div id="input-fields">
     <input type="text" id="main" placeholder="Enter data here" class="multi-input"/>
+    <small id="charCount" style="color: gray; margin-bottom: 15px;">0 / 2331 characters used</small>
+
   </div>
 
   <div id="vcard-fields" class="multi-input">
@@ -113,11 +139,36 @@
       <option value="nopass">None</option>
     </select>
   </div>
+  <label>Upload Logo:
+  <input type="file" id="logoUpload" accept="image/*">
+  <small id="logoWarning" style="color: red; display: none;">Logo too large! Please select a file under 500KB.</small>
+</label>
+<br>
+  <label>Dot Color: <input type="color" id="dotColor" value="#000000"></label>
+<label>Background: <input type="color" id="bgColor" value="#ffffff"></label>
+<br>
+<label for="errorCorrection">Error Correction:</label>
+<select id="errorCorrection">
+  <option value="L">Low (Max capacity)</option>
+  <option value="M" selected>Medium</option>
+  <option value="Q">Quartile</option>
+  <option value="H">High (Most robust)</option>
+</select>
+
+<label>Dot Style:
+  <select id="dotStyle">
+    <option value="rounded">Rounded</option>
+    <option value="dots">Dots</option>
+    <option value="square">Square</option>
+    <option value="extra-rounded">Extra Rounded</option>
+  </select>
+</label>
 
   <button onclick="generateQRCode()">Generate</button>
   <button onclick="downloadQRCode('png')">Download PNG</button>
   <button onclick="downloadQRCode('svg')">Download SVG</button>
   <button onclick="downloadQRCode('pdf')">Download PDF</button>
+
 
   <div id="qrcode"></div>
 </div>
@@ -155,6 +206,7 @@
       document.getElementById("main").placeholder = `Enter ${type}`;
       document.getElementById("main").value = '';
       document.getElementById("input-fields").style.display = 'block';
+
       document.getElementById("main").style.display = 'block';
     } else if (type === 'vcard') {
       document.getElementById("vcard-fields").style.display = 'block';
@@ -192,18 +244,80 @@
   }
 
   function generateQRCode() {
-    const data = getFormattedData();
-    if (!data) {
-      alert("Please fill in the required fields.");
-      return;
-    }
-
-    qrCode.update({ data: data });
-    const qrContainer = document.getElementById("qrcode");
-    qrContainer.innerHTML = "";
-    qrCode.append(qrContainer);
-    qrContainer.style.display = "block";
+  const data = getFormattedData();
+  if (!data) {
+    alert("Please fill in the required fields.");
+    return;
   }
+
+  const dotColor = document.getElementById("dotColor").value;
+  const bgColor = document.getElementById("bgColor").value;
+  const dotStyle = document.getElementById("dotStyle").value;
+  const errorCorrection = document.getElementById("errorCorrection").value;
+
+  // Check for data length based on error correction level
+  const maxCapacity = {
+    L: 2953,
+    M: 2331,
+    Q: 1663,
+    H: 1273
+  };
+
+  if (data.length > maxCapacity[errorCorrection]) {
+    alert(`Text too long for selected error correction level (${errorCorrection}).\nTry shortening the text or lowering the error correction.`);
+    return;
+  }
+
+  const logoFile = document.getElementById("logoUpload").files[0];
+  let logoURL = "";
+  const logoWarning = document.getElementById("logoWarning");
+
+  if (logoFile) {
+    if (logoFile.size > 500 * 1024) { // 500KB
+    logoWarning.style.display = "inline";
+    return;
+  } else {
+    logoWarning.style.display = "none";
+  }
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      logoURL = e.target.result;
+      updateQRCodeWithLogo(data, dotColor, bgColor, dotStyle, logoURL, errorCorrection);
+    };
+    reader.readAsDataURL(logoFile);
+  } else {
+    logoWarning.style.display = "none";
+    updateQRCodeWithLogo(data, dotColor, bgColor, dotStyle, "", errorCorrection);
+  }
+}
+
+function updateQRCodeWithLogo(data, dotColor, bgColor, dotStyle, logoURL, errorCorrection) {
+  qrCode.update({
+    data: data,
+    image: logoURL || "",
+    qrOptions: {
+      errorCorrectionLevel: errorCorrection
+    },
+    dotsOptions: {
+      color: dotColor,
+      type: dotStyle
+    },
+    backgroundOptions: {
+      color: bgColor
+    },
+    imageOptions: {
+      crossOrigin: "anonymous",
+      margin: 10
+    }
+  });
+
+  const qrContainer = document.getElementById("qrcode");
+  qrContainer.innerHTML = "";
+  qrCode.append(qrContainer);
+  qrContainer.style.display = "block";
+}
+
+
 
 async function downloadQRCode(type) {
   if (!document.querySelector("#qrcode svg, #qrcode canvas")) {
@@ -251,6 +365,38 @@ async function downloadQRCode(type) {
 
 
   showInputs();
+
+  
+</script>
+<script>
+  const charCount = document.getElementById("charCount");
+const mainInput = document.getElementById("main");
+const errorCorrectionSelect = document.getElementById("errorCorrection");
+
+function updateCharCounter() {
+  const level = errorCorrectionSelect.value;
+  const maxCapacity = {
+    L: 2953,
+    M: 2331,
+    Q: 1663,
+    H: 1273
+  };
+
+  const currentLength = mainInput.value.length;
+  const max = maxCapacity[level];
+
+  charCount.textContent = `${currentLength} / ${max} characters used`;
+
+  if (currentLength > max) {
+    charCount.style.color = "red";
+  } else {
+    charCount.style.color = "gray";
+  }
+}
+
+mainInput.addEventListener("input", updateCharCounter);
+errorCorrectionSelect.addEventListener("change", updateCharCounter);
+
 </script>
 </body>
 </html>
