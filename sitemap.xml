@@ -37,4 +37,11 @@
     <changefreq>monthly</changefreq>
   </url>
 
+  <url>
+    <loc>https://qrcodegeneratorpro.netlify.app/blog.html</loc>
+    <lastmod>2025-05-13</lastmod>
+    <priority>0.70</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
 </urlset>
