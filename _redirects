@@ -1,3 +1,1 @@
-# Redirect non-www to www (and force HTTPS)
-http://qrcodegeneratorpro.netlify.app/* https://www.qrcodegeneratorpro.netlify.app/:splat 301!
-https://qrcodegeneratorpro.netlify.app/* https://www.qrcodegeneratorpro.netlify.app/:splat 301!
+
