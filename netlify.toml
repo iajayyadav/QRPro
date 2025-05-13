@@ -1,1 +1,12 @@
+# netlify.toml
+[[redirects]]
+  from = "http://www.qrcodegeneratorpro.netlify.app/*"
+  to = "https://qrcodegeneratorpro.netlify.app/:splat"
+  status = 301
+  force = true
 
+[[redirects]]
+  from = "http://qrcodegeneratorpro.netlify.app/*"
+  to = "https://qrcodegeneratorpro.netlify.app/:splat"
+  status = 301
+  force = true
