@@ -1,0 +1,11 @@
+[[redirects]]
+  from = "http://qrcodegeneratorpro.netlify.app/*"
+  to = "https://www.qrcodegeneratorpro.netlify.app/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://qrcodegeneratorpro.netlify.app/*"
+  to = "https://www.qrcodegeneratorpro.netlify.app/:splat"
+  status = 301
+  force = true
