@@ -3,99 +3,52 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pro QR Code Generator</title>
+  <title>Free Custom QR Code Generator with Logo & Colors</title>
+<meta name="description" content="Generate QR codes for URLs, text, contact info, WiFi, and more. Customize with colors, logos, and export as SVG, PNG, or PDF. Fast & free.">
+<meta name="keywords" content="QR code generator, custom QR, QR code with logo, download QR code, create QR online">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://qrcodegeneratorpro.netlify.app/" />
+<link rel="icon" href="assets/favicon.png" />
+<link rel="apple-touch-icon" href="assets/favicon.png">
+
+
+
+<!-- Open Graph Meta Tags -->
+<meta property="og:title" content="Free QR Code Generator - Custom QR with Logo & Colors" />
+<meta property="og:description" content="Generate and download custom QR codes for URLs, text, WiFi, vCards, and more. Supports logos, colors, and multiple formats." />
+<meta property="og:image" content="assets/qr-generator-preview.png" />
+<meta property="og:url" content="https://qrcodegeneratorpro.netlify.app/qr-code-generator" />
+<meta property="og:type" content="website" />
+
+
+<!-- Twitter Card Meta Tags -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Free QR Code Generator - Add Logos, Colors & Download" />
+<meta name="twitter:description" content="Create custom QR codes for URLs, WiFi, vCards, and more. Add logos, colors, and download as PNG, SVG, or PDF." />
+<meta name="twitter:image" content="https://qrcodegeneratorpro.netlify.app/preview-image.png" />
+<meta name="twitter:site" content="@YourTwitterHandle" />
+
+
+ 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link href="style.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/qr-code-styling/lib/qr-code-styling.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #1f1c2c, #928dab);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      margin: 0;
-      color: #fff;
-    }
-    h1 {
-      font-size: 2.15rem;
-      margin-bottom: 20px;
-      margin-top: 100px;
-      animation: fadeInDown 1s ease;
-    }
-    .container {
-      background: #2a2a40;
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-      animation: fadeInUp 1s ease;
-      text-align: center;
-      width: 90%;
-      max-width: 450px;
-    }
-    select, input {
-      padding: 12px;
-      width: 90%;
-      font-size: 16px;
-      border-radius: 8px;
-      border: none;
-      margin: 15px;
-    }
-    input[type="color"]{
-      height: 30px;
-      width: 50px;
-      padding: .5%;
-    }
-    input[type="file"]{
-      border: 1px solid white;
-    }
-    input[type=file]::file-selector-button {
-    background-color: #fff;
-    color: #000;
-    border: 0px;
-    border-right: 1px solid #e5e5e5;
-    padding: 10px 15px;
-    margin-right: 20px;
-    transition: .5s;
-  }
-
-input[type=file]::file-selector-button:hover {
-  background-color: #8dc4fb;
-  border: 0px;
-  border-right: 1px solid #e5e5e5;
+   <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "QR Code Generator",
+  "url": "https://qrcodegeneratorpro.netlify.app",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "All",
+  "description": "Create free QR codes with custom styles, logos, and background colors for any use case.",
+  "browserRequirements": "Requires JavaScript",
+  "image": "https://qrcodegeneratorpro.netlify.app/assets/qr-generator-preview.png"
 }
-    .multi-input { display: none; }
-    button {
-      padding: 12px 24px;
-      font-size: 16px;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      background: linear-gradient(to right, #0072ff, #00c6ff);
-      color: #fff;
-      font-weight: 600;
-      margin: 5px;
-      transition: transform 0.2s ease;
-    }
-    button:hover { transform: scale(1.05); }
-    #qrcode { margin-top: 20px; animation: fadeIn 1s ease; display: none; }
-    @keyframes fadeInDown {
-      from {opacity: 0; transform: translateY(-20px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-    @keyframes fadeInUp {
-      from {opacity: 0; transform: translateY(20px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-    @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
-    }
-  </style>
+</script>
+
+
 </head>
 <body>
 <div id="navbarContainer"></div>
@@ -107,7 +60,11 @@ input[type=file]::file-selector-button:hover {
     });
 </script>
 
-<h1>QR Code Generator</h1>
+
+<h1>Free QR Code Generator</h1>
+<h2>Customize your QR Code with Logo, Colors, and More</h2>
+
+
 <div class="container">
   <select id="type" onchange="showInputs()">
     <option value="url">URL</option>
@@ -147,22 +104,47 @@ input[type=file]::file-selector-button:hover {
   <label>Dot Color: <input type="color" id="dotColor" value="#000000"></label>
 <label>Background: <input type="color" id="bgColor" value="#ffffff"></label>
 <br>
-<label for="errorCorrection">Error Correction:</label>
-<select id="errorCorrection">
-  <option value="L">Low (Max capacity)</option>
-  <option value="M" selected>Medium</option>
-  <option value="Q">Quartile</option>
-  <option value="H">High (Most robust)</option>
-</select>
+<details style="margin-top: 1rem;">
+  <summary style="cursor: pointer; font-weight: bold;">More Options</summary>
+  <div style="margin-top: 0.5rem;">
+    
+    <!-- Error Correction Level -->
+    <label for="errorCorrection">Error Correction:</label>
+    <select id="errorCorrection">
+      <option value="L">Low (Max capacity)</option>
+      <option value="M" selected>Medium</option>
+      <option value="Q">Quartile</option>
+      <option value="H">High (Most robust)</option>
+    </select>
+    
+    <br><br>
 
-<label>Dot Style:
-  <select id="dotStyle">
-    <option value="rounded">Rounded</option>
-    <option value="dots">Dots</option>
-    <option value="square">Square</option>
-    <option value="extra-rounded">Extra Rounded</option>
-  </select>
-</label>
+    <!-- Dot Style -->
+    <label for="dotStyle">Dot Style:</label>
+    <select id="dotStyle">
+      <option value="rounded">Rounded</option>
+      <option value="dots">Dots</option>
+      <option value="square">Square</option>
+      <option value="extra-rounded">Extra Rounded</option>
+    </select>
+
+    <br><br>
+
+    <!-- Corner Radius -->
+    <label for="cornerRadius">Corner Radius (0–1):</label>
+    <input type="number" id="cornerRadius" min="0" max="1" step="0.1" value="0.5" />
+
+    <br><br>
+
+    <!-- Logo Size -->
+   <label for="logoSize">Logo Size (% of QR):</label>
+<input type="range" id="logoSize" min="10" max="100" value="20" />
+<span id="logoSizeValue">20%</span>
+
+  </div>
+</details>
+
+
 
   <button onclick="generateQRCode()">Generate</button>
   <button onclick="downloadQRCode('png')">Download PNG</button>
@@ -172,231 +154,41 @@ input[type=file]::file-selector-button:hover {
 
   <div id="qrcode"></div>
 </div>
+
+<section class="seo-text">
+  <h2>What is a QR Code?</h2>
+  <p>A QR Code (Quick Response Code) is a scannable code that stores data like URLs, phone numbers, emails, and more. Our QR Code Generator lets you customize it with logos, colors, and shapes for better branding and usability.</p>
+
+  <h3>Why Use Our Free QR Code Generator?</h3>
+  <ul>
+    <li>100% free and fast</li>
+    <li>Add your own logo or image</li>
+    <li>Customize color, shape, and error correction</li>
+    <li>Generate QR codes for Wi-Fi, text, URLs, phone numbers, emails, and vCards</li>
+  </ul>
+</section>
+
+<section class="seo-guide">
+  <h2>How to Use the QR Code Generator?</h2>
+  <p>Creating your custom QR code is quick and easy. Follow the steps below to generate and download a fully personalized QR code with logo, color, and style options.</p>
+
+  <ol>
+    <li>Select the type of data you want to encode (URL, text, Wi-Fi, vCard, etc.).</li>
+    <li>Enter your information in the provided fields.</li>
+    <li>Customize the QR code’s style, including dot shape, background color, and logo.</li>
+    <li>Click “Generate QR Code” to view your unique design.</li>
+    <li>Download your QR code in PNG, SVG, or PDF format — ready for print or digital use.</li>
+  </ol>
+</section>
+
+<script src="script.js"></script>
+<div id="footerContainer"></div>
 <script>
-  function toggleMenu() {
-    document.getElementById('nav-links').classList.toggle('active');
-  }
-</script>
-<script>
-  const qrCode = new QRCodeStyling({
-    width: 256,
-    height: 256,
-    type: "svg",
-    data: "",
-    image: "", // Add logo if needed
-    dotsOptions: {
-      color: "#000",
-      type: "rounded"
-    },
-    backgroundOptions: {
-      color: "#ffffff"
-    },
-    imageOptions: {
-      crossOrigin: "anonymous",
-      margin: 10
-    }
-  });
-
-  function showInputs() {
-    const type = document.getElementById("type").value;
-    document.getElementById("input-fields").style.display = 'none';
-    document.querySelectorAll('.multi-input').forEach(e => e.style.display = 'none');
-
-    if (['url', 'text', 'phone', 'email'].includes(type)) {
-      document.getElementById("main").placeholder = `Enter ${type}`;
-      document.getElementById("main").value = '';
-      document.getElementById("input-fields").style.display = 'block';
-
-      document.getElementById("main").style.display = 'block';
-    } else if (type === 'vcard') {
-      document.getElementById("vcard-fields").style.display = 'block';
-    } else if (type === 'wifi') {
-      document.getElementById("wifi-fields").style.display = 'block';
-    }
-  }
-
-  function getFormattedData() {
-    const type = document.getElementById("type").value;
-    const main = document.getElementById("main").value.trim();
-
-    switch(type) {
-      case 'url':
-        return main.startsWith("http") ? main : "https://" + main;
-      case 'text':
-        return main;
-      case 'phone':
-        return `tel:${main}`;
-      case 'email':
-        return `mailto:${main}`;
-      case 'vcard':
-        const name = document.getElementById("vname").value.trim();
-        const phone = document.getElementById("vphone").value.trim();
-        const email = document.getElementById("vemail").value.trim();
-        return `BEGIN:VCARD\nVERSION:3.0\nFN:${name}\nTEL:${phone}\nEMAIL:${email}\nEND:VCARD`;
-      case 'wifi':
-        const ssid = document.getElementById("ssid").value.trim();
-        const pass = document.getElementById("wpass").value.trim();
-        const enc = document.getElementById("encryption").value;
-        return `WIFI:S:${ssid};T:${enc};P:${pass};;`;
-      default:
-        return "";
-    }
-  }
-
-  function generateQRCode() {
-  const data = getFormattedData();
-  if (!data) {
-    alert("Please fill in the required fields.");
-    return;
-  }
-
-  const dotColor = document.getElementById("dotColor").value;
-  const bgColor = document.getElementById("bgColor").value;
-  const dotStyle = document.getElementById("dotStyle").value;
-  const errorCorrection = document.getElementById("errorCorrection").value;
-
-  // Check for data length based on error correction level
-  const maxCapacity = {
-    L: 2953,
-    M: 2331,
-    Q: 1663,
-    H: 1273
-  };
-
-  if (data.length > maxCapacity[errorCorrection]) {
-    alert(`Text too long for selected error correction level (${errorCorrection}).\nTry shortening the text or lowering the error correction.`);
-    return;
-  }
-
-  const logoFile = document.getElementById("logoUpload").files[0];
-  let logoURL = "";
-  const logoWarning = document.getElementById("logoWarning");
-
-  if (logoFile) {
-    if (logoFile.size > 500 * 1024) { // 500KB
-    logoWarning.style.display = "inline";
-    return;
-  } else {
-    logoWarning.style.display = "none";
-  }
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      logoURL = e.target.result;
-      updateQRCodeWithLogo(data, dotColor, bgColor, dotStyle, logoURL, errorCorrection);
-    };
-    reader.readAsDataURL(logoFile);
-  } else {
-    logoWarning.style.display = "none";
-    updateQRCodeWithLogo(data, dotColor, bgColor, dotStyle, "", errorCorrection);
-  }
-}
-
-function updateQRCodeWithLogo(data, dotColor, bgColor, dotStyle, logoURL, errorCorrection) {
-  qrCode.update({
-    data: data,
-    image: logoURL || "",
-    qrOptions: {
-      errorCorrectionLevel: errorCorrection
-    },
-    dotsOptions: {
-      color: dotColor,
-      type: dotStyle
-    },
-    backgroundOptions: {
-      color: bgColor
-    },
-    imageOptions: {
-      crossOrigin: "anonymous",
-      margin: 10
-    }
-  });
-
-  const qrContainer = document.getElementById("qrcode");
-  qrContainer.innerHTML = "";
-  qrCode.append(qrContainer);
-  qrContainer.style.display = "block";
-}
-
-
-
-async function downloadQRCode(type) {
-  if (!document.querySelector("#qrcode svg, #qrcode canvas")) {
-    alert("Please generate the QR code first.");
-    return;
-  }
-
-  const qrContainer = document.getElementById("qrcode");
-
-  if (type === 'pdf') {
-    const originalType = qrCode._options.type;
-    const originalData = getFormattedData();
-
-    // Switch to canvas for PDF export
-    qrCode.update({ type: 'canvas', data: originalData });
-    qrContainer.innerHTML = '';
-    await qrCode.append(qrContainer);
-
-    // Give canvas some time to render
-    setTimeout(() => {
-      const canvas = qrContainer.querySelector("canvas");
-      if (canvas) {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
-
-        // Make sure canvas is rendered before converting
-        const imgData = canvas.toDataURL("image/png");
-        doc.addImage(imgData, 'PNG', 10, 10, 180, 180);
-        doc.save("qr_code.pdf");
-      } else {
-        alert("Canvas not rendered — cannot export PDF.");
-      }
-
-      // Restore original QR display (e.g., SVG)
-      qrCode.update({ type: originalType, data: originalData });
-      qrContainer.innerHTML = '';
-      qrCode.append(qrContainer);
-
-    }, 300); // adjust if needed (300ms is generally safe)
-  } else {
-    qrCode.download({ name: "qr_code", extension: type });
-  }
-}
-
-
-
-  showInputs();
-
-  
-</script>
-<script>
-  const charCount = document.getElementById("charCount");
-const mainInput = document.getElementById("main");
-const errorCorrectionSelect = document.getElementById("errorCorrection");
-
-function updateCharCounter() {
-  const level = errorCorrectionSelect.value;
-  const maxCapacity = {
-    L: 2953,
-    M: 2331,
-    Q: 1663,
-    H: 1273
-  };
-
-  const currentLength = mainInput.value.length;
-  const max = maxCapacity[level];
-
-  charCount.textContent = `${currentLength} / ${max} characters used`;
-
-  if (currentLength > max) {
-    charCount.style.color = "red";
-  } else {
-    charCount.style.color = "gray";
-  }
-}
-
-mainInput.addEventListener("input", updateCharCounter);
-errorCorrectionSelect.addEventListener("change", updateCharCounter);
-
+  fetch("footer.html")
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById("footerContainer").innerHTML = data;
+    });
 </script>
 </body>
 </html>

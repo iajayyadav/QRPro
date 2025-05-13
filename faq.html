@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Frequently Asked Questions - QRSync</title>
+  <link href="style.css" rel="stylesheet" />
+  <style>
+    /* FAQ Page Styles */
+.faq-section {
+  max-width: 760px;
+   margin-top: 150px ;
+   margin-bottom: 100px ;
+  padding: 2rem 1.5rem;
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  background-color: #2a2a40;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.03);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.faq-section h1 {
+  text-align: center;
+  font-size: 2.2rem;
+  /* color: #0a3d62; */
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 1rem;
+}
+
+.faq-item {
+  margin-bottom: 1.8rem;
+}
+
+.faq-item h2 {
+  font-size: 1.3rem;
+  /* color: #0077cc; */
+  margin-bottom: 0.5rem;
+}
+
+.faq-item p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.faq-item a {
+  color: #0077cc;
+  text-decoration: none;
+  border-bottom: 1px dotted transparent;
+  transition: 0.3s ease;
+}
+
+.faq-item a:hover {
+  border-bottom-color: #0077cc;
+}
+
+@media (max-width: 600px) {
+  .faq-section {
+    padding: 1.5rem 1rem;
+  }
+
+  .faq-section h1 {
+    font-size: 1.8rem;
+  }
+
+  .faq-item h2 {
+    font-size: 1.1rem;
+  }
+
+  .faq-item p {
+    font-size: 1rem;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- Load Navbar -->
+  <div id="navbarContainer"></div>
+  <script>
+    fetch("navbar.html")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("navbarContainer").innerHTML = data;
+      });
+  </script>
+
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <h1>Frequently Asked Questions</h1>
+
+    <div class="faq-item">
+      <h2>What is a QR code?</h2>
+      <p>A QR (Quick Response) code is a two-dimensional barcode that stores information like URLs, contact data, and Wi-Fi credentials, which can be scanned using smartphones or QR scanners.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2>Is this QR code generator free?</h2>
+      <p>Yes! Our QR code generator is completely free to use without any sign-up or subscription requirements.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2>Can I add my own logo to the QR code?</h2>
+      <p>Absolutely! You can upload a logo or image to embed in the center of your QR code. Just make sure the logo file is under 500KB for best results.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2>Will my data be stored?</h2>
+      <p>No. All QR code generation happens locally in your browser. We don’t collect or store any personal data or inputs.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2>What formats can I download the QR code in?</h2>
+      <p>You can download the QR code in PNG, SVG, or PDF formats depending on your needs — for print or digital use.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2>Are the QR codes permanent?</h2>
+      <p>Yes. Once generated, your QR code will work as long as the content (URL, contact info, etc.) remains valid. They do not expire.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2>Can I generate QR codes for Wi-Fi or vCards?</h2>
+      <p>Yes! Our tool supports creating QR codes for URLs, plain text, phone numbers, email addresses, Wi-Fi credentials, and vCards (contact sharing).</p>
+    </div>
+
+    <div class="faq-item">
+      <h2>Who can I contact for support?</h2>
+      <p>You can reach out via our <a href="contact.html">Contact Page</a> for any queries, feedback, or technical support.</p>
+    </div>
+  </section>
+
+  <!-- Load Footer -->
+  <div id="footerContainer"></div>
+  <script>
+    fetch("footer.html")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("footerContainer").innerHTML = data;
+      });
+  </script>
+
+</body>
+</html>

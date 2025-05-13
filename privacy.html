@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Privacy Policy - QRSync</title>
+  <link href="style.css" rel="stylesheet" />
+  <style>
+    /* Privacy Page Styles */
+.privacy-section {
+  max-width: 760px;
+   margin-top: 150px ;
+   margin-bottom: 100px ;
+  padding: 2rem 1.5rem;
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  background-color: #2a2a40;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.03);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.privacy-section h1 {
+  font-size: 2.2rem;
+  /* color: #0a3d62; */
+  margin-bottom: 1rem;
+  text-align: center;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 0.5rem;
+}
+
+.privacy-section h2 {
+  font-size: 1.4rem;
+  /* color: #0a3d62; */
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.privacy-section p {
+  font-size: 1.1rem;
+  line-height: 1.75;
+  margin-bottom: 1rem;
+}
+
+.privacy-section a {
+  color: #0077cc;
+  text-decoration: none;
+  border-bottom: 1px dotted transparent;
+  transition: 0.3s ease;
+}
+
+.privacy-section a:hover {
+  border-bottom-color: #0077cc;
+}
+
+@media (max-width: 600px) {
+  .privacy-section {
+    padding: 1.5rem 1rem;
+  }
+
+  .privacy-section h1 {
+    font-size: 1.8rem;
+  }
+
+  .privacy-section h2 {
+    font-size: 1.2rem;
+  }
+
+  .privacy-section p {
+    font-size: 1rem;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- Load navbar -->
+  <div id="navbarContainer"></div>
+  <script>
+    fetch("navbar.html")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("navbarContainer").innerHTML = data;
+      });
+  </script>
+
+  <!-- Privacy Content -->
+  <section class="privacy-section">
+    <h1>Privacy Policy</h1>
+
+    <p><strong>Last Updated:</strong> May 13, 2025</p>
+
+    <p>At <strong>QRPro</strong>, we respect your privacy and are committed to protecting any personal information you may provide while using our QR code generator.</p>
+
+    <h2>Information We Collect</h2>
+    <p>We do not collect or store any personal data from users. All QR codes are generated locally in your browser and no data is sent to our servers.</p>
+
+    <h2>Use of Cookies</h2>
+    <p>Our website may use cookies for basic functionality and analytics. You can disable cookies in your browser settings.</p>
+
+    <h2>Third-Party Services</h2>
+    <p>We may use trusted third-party services (e.g. Google Fonts or analytics tools) that may collect anonymized usage data.</p>
+
+    <h2>Your Consent</h2>
+    <p>By using our site, you consent to our privacy policy.</p>
+
+    <h2>Changes to this Policy</h2>
+    <p>We may update this policy from time to time. Any changes will be posted on this page with an updated revision date.</p>
+
+    <h2>Contact Us</h2>
+    <p>If you have any questions about this Privacy Policy, please contact us via our <a href="contact.html">Contact Page</a>.</p>
+  </section>
+
+  <!-- Load footer -->
+  <div id="footerContainer"></div>
+  <script>
+    fetch("footer.html")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("footerContainer").innerHTML = data;
+      });
+  </script>
+<script src="script.js"></script>
+</body>
+</html>

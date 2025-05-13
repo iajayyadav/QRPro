@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us - QR Code Generator</title>
+  <meta name="description" content="Contact the team behind the free QR Code Generator. We’d love to hear from you!">
+  <link rel="icon" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+  <style>
+
+    .contact-section {
+  padding: 2rem;
+  max-width: 700px;
+  margin: auto;
+  
+
+}
+h1{
+    margin: 0;
+}
+.container{
+    margin-top: 100px;
+    width: 100%;
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  font-family: inherit;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+input{
+    margin: 0;
+}
+.submit-btn {
+  padding: 12px 24px;
+  background-color: #0f766e;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.form-message {
+  margin-bottom: 20px;
+  padding: 12px;
+  border-radius: 6px;
+  display: none;
+  font-weight: bold;
+}
+
+.form-message.success {
+  background-color: #d1fae5;
+  color: #065f46;
+  display: block;
+}
+
+.form-message.error {
+  background-color: #fee2e2;
+  color: #991b1b;
+  display: block;
+}
+
+  </style>
+</head>
+<body>
+
+<!-- Reusable Header -->
+<div id="navbarContainer"></div>
+<script>
+  fetch("navbar.html")
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById("navbarContainer").innerHTML = data;
+    });
+</script>
+
+<!-- Contact Page Content -->
+<main class="contact-section">
+  <div class="container">
+    <h1>Contact Us</h1>
+    <p>If you have any questions, suggestions, or feedback, feel free to reach out.</p>
+
+    <div id="form-message" class="form-message"></div>
+
+    <form id="contactForm">
+      <div class="form-group">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" required placeholder="John Doe">
+      </div>
+
+      <div class="form-group">
+        <label for="email">Your Email</label>
+        <input type="email" id="email" name="email" required placeholder="you@example.com">
+      </div>
+
+      <div class="form-group">
+        <label for="message">Your Message</label>
+        <textarea id="message" name="message" rows="5" required placeholder="Your message here..."></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">Send Message</button>
+    </form>
+  </div>
+</main>
+
+<!-- Reusable Footer -->
+<div id="footerContainer"></div>
+<script>
+  fetch("footer.html")
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById("footerContainer").innerHTML = data;
+    });
+</script>
+<script src="script.js"></script>
+<!-- Optional AJAX Form Submission -->
+<script>
+  document.getElementById("contactForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const message = document.getElementById("message").value.trim();
+    const messageBox = document.getElementById("form-message");
+
+    fetch("https://formspree.io/f/xyzwkgaa", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, message })
+    })
+    .then(response => {
+      if (response.ok) {
+        messageBox.innerHTML = "✅ Message sent successfully!";
+        messageBox.classList.add("success");
+        messageBox.classList.remove("error");
+        document.getElementById("contactForm").reset();
+      } else {
+        throw new Error("Form submission failed");
+      }
+    })
+    .catch(error => {
+      messageBox.innerHTML = "❌ Failed to send message. Please try again later.";
+      messageBox.classList.add("error");
+      messageBox.classList.remove("success");
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset 
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://qrcodegeneratorpro.netlify.app/</loc>
+    <lastmod>2025-05-13</lastmod>
+    <priority>1.00</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://qrcodegeneratorpro.netlify.app/about.html</loc>
+    <lastmod>2025-05-13</lastmod>
+    <priority>0.80</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://qrcodegeneratorpro.netlify.app/contact.html</loc>
+    <lastmod>2025-05-13</lastmod>
+    <priority>0.80</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://qrcodegeneratorpro.netlify.app/privacy.html</loc>
+    <lastmod>2025-05-13</lastmod>
+    <priority>0.60</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://qrcodegeneratorpro.netlify.app/faq.html</loc>
+    <lastmod>2025-05-13</lastmod>
+    <priority>0.70</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+</urlset>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us - QRSync</title>
+  <meta name="description" content="Learn about QRSync – your go-to free and customizable QR Code Generator. Discover our mission and how we help users create stylish, branded QR codes easily.">
+  <link rel="canonical" href="https://qrcodegeneratorpro.netlify.app/about.html" />
+  <link rel="icon" href="assets/favicon.png" />
+  <link href="style.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* ========== About Page Styles ========== */
+
+.about-section {
+  max-width: 760px;
+   margin-top: 150px ;
+   margin-bottom: 100px ;
+  padding: 2rem 1.5rem;
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  background-color: #2a2a40;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.03);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.about-section h1,
+.about-section h2 {
+  color: #fff;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.about-section h1 {
+  text-align: center;
+  font-size: 2.2rem;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 0.5rem;
+}
+
+.about-section p {
+  font-size: 1.1rem;
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.about-section ul {
+  list-style: disc;
+ 
+  margin-bottom: 1.5rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  list-style-type:none;
+}
+
+.about-section ul li {
+    border:.5px dotted #fff;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 10px;
+    transition: .3s;
+}
+.about-section ul li:hover{
+   padding: 8px;
+}
+.about-section a {
+  color: #6cb4e6;
+  text-decoration: none;
+  border-bottom: 1px dotted transparent;
+  transition: 0.3s ease;
+}
+
+.about-section a:hover {
+  border-bottom-color: #b9e2ff;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .about-section {
+    padding: 1.5rem 1rem;
+  }
+
+  .about-section h1 {
+    font-size: 1.8rem;
+  }
+
+  .about-section p,
+  .about-section ul {
+    font-size: 1rem;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+<div id="navbarContainer"></div>
+<script>
+  fetch("navbar.html")
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById("navbarContainer").innerHTML = data;
+    });
+</script>
+
+<main class="about-section">
+  <h1 style="text-align: center;">About QRPro</h1>
+
+  <p style="font-size: 1.1rem; line-height: 1.8;">
+    <strong>QRPro</strong> is a modern, free, and fully customizable QR Code Generator designed to make your digital life easier. Whether you need a code for a website, event, Wi-Fi, or digital contact card, QRSync helps you create professional and stylish QR codes in seconds.
+  </p>
+
+
+
+  <h2>🎨 What Makes QRPro Special?</h2>
+  <ul style="padding-left: 1.5rem; line-height: 1.8;">
+    <li>Fully customizable styles — shapes, colors, and logos</li>
+    <li>Instant download in PNG, SVG, and PDF formats</li>
+    <li>Fast, lightweight, and mobile-friendly interface</li>
+    <li>No user data stored — your privacy matters</li>
+    <li>Open and free for personal or commercial use</li>
+  </ul>
+
+
+  <h2>📬 Stay Connected</h2>
+  <p>
+    Have questions, feedback, or ideas? <a href="contact.html">Contact us here</a> — we’d love to hear from you.
+  </p>
+</main>
+
+<div id="footerContainer"></div>
+<script>
+  fetch("footer.html")
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById("footerContainer").innerHTML = data;
+    });
+</script>
+<script src="script.js"></script>
+
+</body>
+</html>
