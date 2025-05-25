@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <link rel="icon" href="assets/favicon.png" />
+<link rel="apple-touch-icon" href="assets/favicon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Frequently Asked Questions - QRPro</title>
   <link href="style.css" rel="stylesheet" />
@@ -9,55 +11,69 @@
     /* FAQ Page Styles */
 .faq-section {
   max-width: 760px;
-   margin-top: 150px ;
-   margin-bottom: 100px ;
-  padding: 2rem 1.5rem;
+  margin-top: var(--top-margin);
+  margin-bottom: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: var(--spacing-lg) var(--spacing-md);
   font-family: 'Poppins', sans-serif;
-  color: #fff;
-  background-color: #2a2a40;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.03);
+  color: var(--text-dark);
+  background-color: var(--bg-light-hover);
   border-radius: 8px;
+  box-shadow: var(--shadow-sm);
   text-align: center;
+}
+
+/* Headings */
+.faq-section h1,
+.faq-section h2 {
+  color: var(--primary);
+  margin-top: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
 }
 
 .faq-section h1 {
   text-align: center;
   font-size: 2.2rem;
-  /* color: #0a3d62; */
-  margin-bottom: 2rem;
-  border-bottom: 2px solid #eee;
-  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: var(--spacing-sm);
 }
 
+/* FAQ Items */
 .faq-item {
-  margin-bottom: 1.8rem;
+  margin-bottom: var(--spacing-lg);
+  text-align: left;
 }
 
 .faq-item h2 {
   font-size: 1.3rem;
-  /* color: #0077cc; */
-  margin-bottom: 0.5rem;
+  color: var(--primary);
+  margin-bottom: var(--spacing-sm);
 }
 
 .faq-item p {
   font-size: 1.05rem;
   line-height: 1.7;
+  color: var(--text-dark-secondary);
 }
 
+/* Links */
 .faq-item a {
-  color: #0077cc;
+  color: var(--primary);
   text-decoration: none;
   border-bottom: 1px dotted transparent;
-  transition: 0.3s ease;
+  transition: var(--transition-normal);
 }
 
 .faq-item a:hover {
-  border-bottom-color: #0077cc;
+  border-bottom-color: var(--primary);
+  background-color: var(--primary-light);
 }
 
+/* Responsive */
 @media (max-width: 600px) {
   .faq-section {
-    padding: 1.5rem 1rem;
+    padding: var(--spacing-md) var(--spacing-sm);
   }
 
   .faq-section h1 {
@@ -72,6 +88,8 @@
     font-size: 1rem;
   }
 }
+
+
 
   </style>
 </head>
@@ -141,6 +159,7 @@
         document.getElementById("footerContainer").innerHTML = data;
       });
   </script>
+  <script src="script.js"></script>
 
 </body>
 </html>

@@ -10,52 +10,62 @@
   <link href="style.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    .blog-container {
+.blog-container {
   max-width: 800px;
-  margin: 40px auto;
-  padding: 0 20px;
+  margin: var(--spacing-lg) auto;
+  margin-top: var(--top-margin);
+  padding: 0 var(--spacing-md);
   font-family: 'Poppins', sans-serif;
 }
-.blog-post{
-background-color: #f9f9f9;
-  padding: 30px;
+
+.blog-post {
+  background-color: var(--bg-light-hover);
+  padding: var(--spacing-xl);
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-md);
   max-width: 800px;
-  margin: 50px auto;
-  font-family: 'Arial', sans-serif;
+  margin: var(--spacing-xl) auto;
+  font-family: 'Poppins', sans-serif;
 }
+
+/* Headings */
 .blog-post h1 {
-    color: #333;
+  margin-top: 10px;
+  color: var(--text-dark);
   font-size: 2.2rem;
-  margin-bottom: 10px;
-}
-
-.blog-meta {
-  color: #777;
-  font-size: 0.9rem;
-  margin-bottom: 20px;
-}
-
-.blog-image {
-  width: 100%;
-  max-height: 400px;
-  object-fit: cover;
-  margin: 20px 0;
-  border-radius: 8px;
+  margin-bottom: var(--spacing-sm);
 }
 
 .blog-post h2 {
   font-size: 1.4rem;
-   color: #444;
-  margin-top: 25px;
+  color: var(--primary-dark);
+  margin-top: calc(var(--spacing-lg) + var(--spacing-sm));
+  margin-bottom: var(--spacing-sm);
 }
 
-.blog-post p {
-     color: #555;
-  line-height: 1.6;
-  margin: 15px 0;
+/* Blog Meta */
+.blog-meta {
+  color: var(--text-dark-secondary);
+  font-size: 0.9rem;
+  margin-bottom: var(--spacing-md);
 }
+
+/* Blog Image */
+.blog-image {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  margin: var(--spacing-md) 0;
+  border-radius: 8px;
+}
+
+/* Blog Paragraphs */
+.blog-post p {
+  color: var(--text-dark-secondary);
+  line-height: 1.6;
+  margin: var(--spacing-md) 0;
+}
+
 
   </style>
 </head>
@@ -77,7 +87,7 @@ background-color: #f9f9f9;
       <h1>Top 7 Real-World Uses of QR Codes in 2025</h1>
       <p class="blog-meta">Published on May 13, 2025 • by QRPro Team</p>
       
-      <img src="assets/blog-qr-usecases.png" alt="QR Code Use Cases" class="blog-image"/>
+      <img src="https://cdn.pixabay.com/photo/2019/08/23/15/05/code-4425886_1280.jpg" alt="QR Code Use Cases" class="blog-image"/>
 
       <p>QR codes are no longer just black-and-white patterns on posters. In 2025, they’re powering interactions across industries — simplifying access, speeding up transactions, and enabling secure data exchange. Here are seven cutting-edge uses of QR codes in today’s digital world.</p>
       
@@ -109,7 +119,7 @@ background-color: #f9f9f9;
   <h1>Why Custom QR Codes Are Better for Your Brand</h1>
   <p class="blog-meta">Published on May 13, 2025 • by QRPro Team</p>
 
-  <img src="assets/custom-qr-branding.jpg" alt="Custom QR Code Branding" class="blog-image"/>
+  <img src="https://cdn.pixabay.com/photo/2016/01/29/09/56/hands-1167612_1280.jpg" alt="Custom QR Code Branding" class="blog-image"/>
 
   <p>QR codes are no longer boring black-and-white boxes. In today’s competitive market, custom-designed QR codes are making a major impact on branding, user engagement, and conversions. Whether you’re a small business or a global company, branded QR codes offer a smarter way to connect.</p>
 

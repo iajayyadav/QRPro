@@ -1,15 +1,30 @@
 <!-- navbar.html -->
 <nav class="navbar">
     <div class="nav-container">
-  <a href="index.html" style="text-decoration: none;"><div class="logo">QR<span>Pro</span></div></a>
-  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-  <ul class="nav-links" id="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="blog.html">Blog</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="privacy.html">Privacy policy</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-  </div>
+        <a href="index.html" class="logo-link">
+            <div class="logo">
+                <i class="ri-qr-code-line"></i>
+                <span><strong>QR</strong>Pro</span>
+            </div>
+        </a>
+        
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html" class="active"><i class="ri-home-line"></i>Home</a></li>
+            <li><a href="blog.html"><i class="ri-article-line"></i>Blog</a></li>
+            <li><a href="about.html"><i class="ri-information-line"></i>About</a></li>
+            <li><a href="privacy.html"><i class="ri-shield-line"></i>Privacy Policy</a></li>
+            <li><a href="contact.html"><i class="ri-mail-line"></i>Contact</a></li>
+        </ul>
+
+        <div class="nav-controls">
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                <i class="ri-sun-line light-icon"></i>
+                <i class="ri-moon-line dark-icon"></i>
+            </button>
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">
+                <i class="ri-menu-line"></i>
+            </button>
+        </div>
+    </div>
 </nav>
 

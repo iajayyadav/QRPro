@@ -4,54 +4,65 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Privacy Policy - QRPro</title>
+  <link rel="icon" href="assets/favicon.png" />
+<link rel="apple-touch-icon" href="assets/favicon.png">
   <link href="style.css" rel="stylesheet" />
   <style>
     /* Privacy Page Styles */
 .privacy-section {
   max-width: 760px;
-   margin-top: 150px ;
-   margin-bottom: 100px ;
-  padding: 2rem 1.5rem;
+  margin-top: var(--top-margin);
+  margin-bottom: 100px;
+      margin-right: auto;
+      margin-left: auto;
+
+  padding: var(--spacing-lg) var(--spacing-md);
   font-family: 'Poppins', sans-serif;
-  color: #fff;
-  background-color: #2a2a40;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.03);
+  color: var(--text-dark);
+  background-color: var(--bg-light-hover);
+  box-shadow: var(--shadow-sm);
   border-radius: 8px;
   text-align: center;
 }
 
+/* Headings */
 .privacy-section h1 {
   font-size: 2.2rem;
-  /* color: #0a3d62; */
-  margin-bottom: 1rem;
+  color: var(--primary);
+  margin-bottom: var(--spacing-md);
   text-align: center;
-  border-bottom: 2px solid #eee;
-  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: var(--spacing-sm);
 }
 
 .privacy-section h2 {
   font-size: 1.4rem;
-  /* color: #0a3d62; */
-  margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
+  color: var(--primary-dark);
+  margin-top: var(--spacing-lg);
+  margin-bottom: var(--spacing-sm);
 }
 
+/* Paragraphs */
 .privacy-section p {
   font-size: 1.1rem;
   line-height: 1.75;
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-md);
+  color: var(--text-dark-secondary);
 }
 
+/* Links */
 .privacy-section a {
-  color: #0077cc;
+  color: var(--primary);
   text-decoration: none;
   border-bottom: 1px dotted transparent;
-  transition: 0.3s ease;
+  transition: var(--transition-normal);
 }
 
 .privacy-section a:hover {
-  border-bottom-color: #0077cc;
+  border-bottom-color: var(--primary);
+  background-color: var(--primary-light);
 }
+
 
 @media (max-width: 600px) {
   .privacy-section {
