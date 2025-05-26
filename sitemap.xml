@@ -44,4 +44,11 @@
     <changefreq>monthly</changefreq>
   </url>
 
+  <url>
+    <loc>https://qrcodegeneratorpro.netlify.app/barcode.html</loc>
+    <lastmod>2025-05-25</lastmod>
+    <priority>0.95</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
 </urlset>
