@@ -1,5 +1,70 @@
 let currentBarcode = null;
 
+const barcodeTypes = {
+    // Templates
+    product: {
+        type: 'CODE128',
+        placeholder: 'Enter Product ID (e.g., PRD123456)',
+        example: 'PRD123456'
+    },
+    isbn: {
+        type: 'EAN13',
+        placeholder: 'Enter 12 digits ISBN number',
+        example: '978014300723'
+    },
+    upc: {
+        type: 'UPC',
+        placeholder: 'Enter 11 digits UPC number',
+        example: '12345678901'
+    },
+    ean13: {
+        type: 'EAN13',
+        placeholder: 'Enter 12 digits EAN-13 number',
+        example: '123456789012'
+    },
+    // Custom Types
+    code128: {
+        type: 'CODE128',
+        placeholder: 'Enter any text or numbers',
+        example: 'ABC123'
+    },
+    code39: {
+        type: 'CODE39',
+        placeholder: 'Enter uppercase letters, numbers, or symbols',
+        example: 'HELLO123'
+    },
+    ean8: {
+        type: 'EAN8',
+        placeholder: 'Enter 7 digits EAN-8 number',
+        example: '1234567'
+    }
+};
+
+function applyTemplate() {
+    const selected = document.getElementById('barcodeTemplate').value;
+    const barcodeValue = document.getElementById('barcodeValue');
+
+    if (selected && barcodeTypes[selected]) {
+        const selectedType = barcodeTypes[selected];
+        barcodeValue.placeholder = selectedType.placeholder;
+        barcodeValue.value = '';
+    } else {
+        barcodeValue.placeholder = 'Enter value';
+    }
+}
+
+function useSampleValue() {
+    const selected = document.getElementById('barcodeTemplate').value;
+    const barcodeValue = document.getElementById('barcodeValue');
+
+    if (selected && barcodeTypes[selected]) {
+        barcodeValue.value = barcodeTypes[selected].example;
+        generateBarcode();
+    } else {
+        showError('Please select a barcode type first');
+    }
+}
+
 function validateInput(type, value) {
     switch(type) {
         case 'EAN13':
@@ -45,7 +110,8 @@ function showError(message) {
 }
 
 function generateBarcode() {
-    const type = document.getElementById('barcodeType').value;
+    const selected = document.getElementById('barcodeTemplate').value;
+    const type = barcodeTypes[selected]?.type || 'CODE128';
     const value = document.getElementById('barcodeValue').value.trim();
     const width = parseInt(document.getElementById('barcodeWidth').value);
     const height = parseInt(document.getElementById('barcodeHeight').value);
@@ -138,39 +204,59 @@ function generateBarcode() {
 }
 
 function downloadBarcode() {
-    const value = document.getElementById('barcodeValue').value.trim();
-    
-    if (!value) {
-        showError('Please enter a value before downloading');
-        return;
-    }
-    
     if (!currentBarcode) {
         showError('Please generate a barcode first');
         return;
     }
 
+    const format = document.getElementById('downloadFormat').value;
     const svg = document.getElementById('barcodeImage');
     const svgData = new XMLSerializer().serializeToString(svg);
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    const img = new Image();
 
-    img.onload = function() {
-        canvas.width = img.width;
-        canvas.height = img.height;
-        ctx.fillStyle = 'white';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(img, 0, 0);
+    if (format === 'svg') {
+        // Download as SVG
+        const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+        const url = URL.createObjectURL(svgBlob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `barcode_${currentBarcode}.svg`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    } else {
+        // Download as PNG or JPG
+        const canvas = document.createElement('canvas');
+        const width = svg.width.baseVal.value;
+        const height = svg.height.baseVal.value;
+        canvas.width = width;
+        canvas.height = height;
 
-        const pngFile = canvas.toDataURL('image/png');
-        const downloadLink = document.createElement('a');
-        downloadLink.download = `barcode-${currentBarcode}.png`;
-        downloadLink.href = pngFile;
-        downloadLink.click();
-    };
+        const ctx = canvas.getContext('2d');
+        const image = new Image();
+        const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+        const url = URL.createObjectURL(svgBlob);
 
-    img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)));
+        image.onload = function() {
+            ctx.fillStyle = document.getElementById('backgroundColor').value;
+            ctx.fillRect(0, 0, width, height);
+            ctx.drawImage(image, 0, 0);
+
+            const mimeType = format === 'jpg' ? 'image/jpeg' : 'image/png';
+            canvas.toBlob(function(blob) {
+                const downloadUrl = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = downloadUrl;
+                a.download = `barcode_${currentBarcode}.${format}`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(downloadUrl);
+            }, mimeType);
+        };
+
+        image.src = url;
+    }
 }
 
 // Add event listeners
