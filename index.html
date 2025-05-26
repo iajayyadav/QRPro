@@ -76,6 +76,7 @@
 
 
 <div class="container">
+  <label for="type">Select Options:</label>
   <select id="type" onchange="showInputs()">
     <option value="url">URL</option>
     <option value="text">Plain Text</option>
@@ -87,7 +88,6 @@
 
   <div id="input-fields">
     <input type="text" id="main" placeholder="Enter data here" class="multi-input"/>
-    <small id="charCount" style="color: gray; margin-bottom: 15px;">0 / 2331 characters used</small>
 
   </div>
 
@@ -127,7 +127,7 @@
       <option value="H">High (Most robust)</option>
     </select>
     
-    <br><br>
+    <br>
 
     <!-- Dot Style -->
     <label for="dotStyle">Dot Style:</label>
@@ -138,13 +138,28 @@
       <option value="extra-rounded">Extra Rounded</option>
     </select>
 
-    <br><br>
+    <br>
 
     <!-- Corner Radius -->
     <label for="cornerRadius">Corner Radius (0–1):</label>
     <input type="number" id="cornerRadius" min="0" max="1" step="0.1" value="0.5" />
 
-    <br><br>
+    <br>
+
+
+    <label for="quality">Select QR Resolution:</label>
+    <input type="range" id="quality" name="quality" min="256" max="2048" step="256" value="512">
+    <span id="quality-value">512 px</span>
+    <br>
+    <script>
+      const qualityInput = document.getElementById('quality');
+const qualityValue = document.getElementById('quality-value');
+
+qualityInput.addEventListener('input', function() {
+  qualityValue.textContent = `${this.value} px`;
+});
+
+    </script>
 
     <!-- Logo Size -->
    <label for="logoSize">Logo Size (% of QR):</label>
@@ -155,14 +170,22 @@
 </details>
 
 
+<div id="qrcode"></div>
+<div class="button-group">
+  <button onclick="generateQRCode()" class="primary-button">Generate QR Code</button>
 
-  <button onclick="generateQRCode()">Generate</button>
-  <button onclick="downloadQRCode('png')">Download PNG</button>
-  <button onclick="downloadQRCode('svg')">Download SVG</button>
-  <button onclick="downloadQRCode('pdf')">Download PDF</button>
+  <select id="downloadFormat" class="format-select">
+    <option value="png">PNG</option>
+    <option value="svg">SVG</option>
+    <option value="pdf">PDF</option>
+  </select>
 
 
-  <div id="qrcode"></div>
+  <button onclick="downloadQRCode(document.getElementById('downloadFormat').value)" class="download-button">Download</button>
+</div>
+
+
+  
 </div>
 
 <section class="seo-text">
@@ -205,5 +228,6 @@
       document.getElementById("footerContainer").innerHTML = data;
     });
 </script>
+<script src="qr.js"></script>
 </body>
 </html>

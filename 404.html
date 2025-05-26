@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>404 - Page Not Found | QR Code Generator Pro</title>
+  <meta name="description" content="The page you're looking for cannot be found.">
+  <link rel="icon" href="assets/favicon.png" />
+  <link href="style.css" rel="stylesheet">
+  <style>
+    .error-container {
+      margin-top: var(--top-margin);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 70vh;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .error-code {
+      font-size: 8rem;
+      font-weight: bold;
+      margin: 0;
+      background: linear-gradient(45deg, #4a90e2, #63b3ed);
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1;
+    }
+
+    .error-message {
+      font-size: 2rem;
+      margin: 1rem 0;
+      color: var(--text-color);
+    }
+
+    .error-description {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+    }
+
+    .home-button {
+      padding: 12px 24px;
+      font-size: 1.1rem;
+      background: var(--primary-color);
+      color:var(--text-color);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .home-button:hover {
+      background: var(--primary-hover);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="navbarContainer"></div>
+  <script>
+    fetch("navbar.html")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("navbarContainer").innerHTML = data;
+      });
+  </script>
+
+  <div class="error-container">
+    <h1 class="error-code">404</h1>
+    <h2 class="error-message">Page Not Found</h2>
+    <p class="error-description">
+      Oops! The page you're looking for seems to have wandered off. Don't worry though,
+      you can always head back to our homepage and generate some awesome QR codes!
+    </p>
+    <a href="/" class="home-button" >Back to Homepage</a>
+  </div>
+
+  <div id="footerContainer"></div>
+  <script>
+    fetch("footer.html")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("footerContainer").innerHTML = data;
+      });
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
