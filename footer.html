@@ -1,20 +1,20 @@
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <footer class="site-footer">
   <div class="footer-container">
     <div class="footer-brand">
-      <a href="index.html" style="text-decoration: none;"><h3><span style="color:var(--primary)">QR</span>Pro</h3></a>
+      <a href="/" class="footer-logo-link" style="text-decoration: none;"><h3><span style="color:var(--primary)">QR</span>Pro</h3></a>
       <p>Create high-quality, customizable QR codes instantly with logos, colors, and shapes. Free, fast, and secure.</p>
     </div>
 
     <div class="footer-links">
       <h4>Quick Links</h4>
       <ul>
-        <li><a href="barcode.html">Barcode Generator</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="privacy.html">Privacy Policy</a></li>
-        <li><a href="faq.html">FAQ</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="/barcode.html" class="footer-link" data-page="barcode">Barcode Generator</a></li>
+        <li><a href="/blog/" class="footer-link" data-page="blog">Blog</a></li>
+        <li><a href="/about.html" class="footer-link" data-page="about">About</a></li>
+        <li><a href="/privacy.html" class="footer-link" data-page="privacy">Privacy Policy</a></li>
+        <li><a href="/faq.html" class="footer-link" data-page="faq">FAQ</a></li>
+        <li><a href="/contact.html" class="footer-link" data-page="contact">Contact</a></li>
       </ul>
     </div>
 
@@ -32,3 +32,19 @@
     <p>&copy; 2025 Free QR & Barcode Generator | Made with <i class="fa fa-heart" style="color: red;"></i> by <a href="/" target="_blank" rel="noopener noreferrer" style="color:var(--primary);text-decoration: none;">Ajay</a></p>
   </div>
 </footer>
+
+<script>
+// Fix paths based on current directory
+document.addEventListener('DOMContentLoaded', function() {
+    const isInBlogDir = window.location.pathname.includes('/blog/');
+    if (isInBlogDir) {
+        document.querySelectorAll('.footer-link').forEach(link => {
+            const href = link.getAttribute('href');
+            if (href.startsWith('/')) {
+                link.href = '..' + href;
+            }
+        });
+        document.querySelector('.footer-logo-link').href = '../';
+    }
+});
+</script>

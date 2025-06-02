@@ -1,7 +1,7 @@
 <!-- navbar.html -->
 <nav class="navbar">
     <div class="nav-container">
-        <a href="index.html" class="logo-link">
+        <a href="/" class="logo-link">
             <div class="logo">
                 <i class="ri-qr-code-line"></i>
                 <span><strong>QR</strong>Pro</span>
@@ -9,12 +9,12 @@
         </a>
         
         <ul class="nav-links" id="nav-links">
-            <li><a href="index.html" class="active"><i class="ri-home-line"></i>Home</a></li>
-            <li><a href="barcode.html" class="active"><i class="ri-barcode-line"></i>Barcode</a></li>
-            <li><a href="blog.html"><i class="ri-article-line"></i>Blog</a></li>
-            <li><a href="about.html"><i class="ri-information-line"></i>About</a></li>
-            <li><a href="privacy.html"><i class="ri-shield-line"></i>Privacy Policy</a></li>
-            <li><a href="contact.html"><i class="ri-mail-line"></i>Contact</a></li>
+            <li><a href="/" class="nav-link" data-page="home"><i class="ri-home-line"></i>Home</a></li>
+            <li><a href="/barcode.html" class="nav-link" data-page="barcode"><i class="ri-barcode-line"></i>Barcode</a></li>
+            <li><a href="/blog/" class="nav-link" data-page="blog"><i class="ri-article-line"></i>Blog</a></li>
+            <li><a href="/about.html" class="nav-link" data-page="about"><i class="ri-information-line"></i>About</a></li>
+            <li><a href="/privacy.html" class="nav-link" data-page="privacy"><i class="ri-shield-line"></i>Privacy Policy</a></li>
+            <li><a href="/contact.html" class="nav-link" data-page="contact"><i class="ri-mail-line"></i>Contact</a></li>
         </ul>
 
         <div class="nav-controls">
@@ -28,4 +28,30 @@
         </div>
     </div>
 </nav>
+
+<script>
+// Fix paths based on current directory
+document.addEventListener('DOMContentLoaded', function() {
+    const isInBlogDir = window.location.pathname.includes('/blog/');
+    if (isInBlogDir) {
+        document.querySelectorAll('.nav-link').forEach(link => {
+            const href = link.getAttribute('href');
+            if (href.startsWith('/')) {
+                link.href = '..' + href;
+            }
+        });
+        document.querySelector('.logo-link').href = '../';
+    }
+
+    // Set active link
+    const currentPage = window.location.pathname;
+    document.querySelectorAll('.nav-link').forEach(link => {
+        if (currentPage.includes(link.getAttribute('data-page'))) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
+});
+</script>
 

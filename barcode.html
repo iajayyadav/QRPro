@@ -10,9 +10,82 @@
     <link rel="icon" href="assets/favicon.png" >
     <style>
         h1 {
-                margin-top: var(--top-margin);
-            
+            margin-top: var(--top-margin);
         }
+
+        .info-section {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: var(--background-color);
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .info-card {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .info-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-card li {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .info-card li:before {
+            content: "•";
+            color: var(--primary);
+            position: absolute;
+            left: 0;
+        }
+
+        .barcode-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .barcode-type {
+            background: var(--bg-light);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .barcode-type h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .barcode-type p {
+            font-size: 0.9rem;
+            color: var(--text-dark-secondary);
+        }
+
         .barcode-container {
             max-width: 800px;
             margin: 0 auto;
@@ -40,7 +113,6 @@
         }
         .barcode-actions button,.barcode-actions select  {
             width: 70%;
-
         }
         .barcode-actions #downloadBtn {
            width: 40%;
@@ -64,37 +136,38 @@
     <h1>Free Barcode Generator</h1>
     <h2>Create Unique Barcodes with Colors, Text, and Styles</h2>
     
+    <!-- Generator Section -->
     <div class="container">
-            <h2>Barcode Generator</h2>
-            <div class="barcode-options">
-                <div class="input-group">
-                    <label for="barcodeTemplate">Barcode Type</label>
-                    <select id="barcodeTemplate" class="input" onchange="applyTemplate()">
-                        <optgroup label="Common Templates">
-                            <option value="product">Product ID (Code 128)</option>
-                            <option value="isbn">ISBN (EAN-13)</option>
-                            <option value="upc">UPC</option>
-                            <option value="ean13">EAN-13</option>
-                        </optgroup>
-                        <optgroup label="Custom Types">
-                            <option value="code128">Code 128</option>
-                            <option value="code39">Code 39</option>
-                            <option value="ean8">EAN-8</option>
-                        </optgroup>
-                    </select>
+        <h2>Barcode Generator</h2>
+        <div class="barcode-options">
+            <div class="input-group">
+                <label for="barcodeTemplate">Barcode Type</label>
+                <select id="barcodeTemplate" class="input" onchange="applyTemplate()">
+                    <optgroup label="Common Templates">
+                        <option value="product">Product ID (Code 128)</option>
+                        <option value="isbn">ISBN (EAN-13)</option>
+                        <option value="upc">UPC</option>
+                        <option value="ean13">EAN-13</option>
+                    </optgroup>
+                    <optgroup label="Custom Types">
+                        <option value="code128">Code 128</option>
+                        <option value="code39">Code 39</option>
+                        <option value="ean8">EAN-8</option>
+                    </optgroup>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="barcodeValue">Barcode Value</label>
+                <div style="display: flex; gap: 8px;">
+                    <input type="text" id="barcodeValue" class="input" placeholder="Enter value" style="flex: 1;">
+                    <button onclick="useSampleValue()" class="button secondary" >
+                        <i class="ri-magic-line"></i> Sample
+                    </button>
                 </div>
-                <div class="input-group">
-                    <label for="barcodeValue">Barcode Value</label>
-                    <div style="display: flex; gap: 8px;">
-                        <input type="text" id="barcodeValue" class="input" placeholder="Enter value" style="flex: 1;">
-                        <button onclick="useSampleValue()" class="button secondary" >
-                            <i class="ri-magic-line"></i> Sample
-                        </button>
-                    </div>
-                </div>
+            </div>
 
-                <details style="margin-top: 1rem;">
-                    <summary style="cursor: pointer; font-weight: bold;">More Options</summary>
+            <details style="margin-top: 1rem;">
+                <summary style="cursor: pointer; font-weight: bold;">More Options</summary>
                 <div class="input-group">
                     <label for="barcodeWidth">Width (px)</label>
                     <input type="number" id="barcodeWidth" class="input" value="2" min="1" max="5">
@@ -119,7 +192,6 @@
                     <label for="margin">Margin (px)</label>
                     <input type="number" id="margin" class="input" value="10" min="5" max="20">
                 </div>
-            </div>
             </details>
             
             <div class="barcode-preview" id="barcodePreview" style="display: none;">
@@ -131,15 +203,100 @@
                     <i class="ri-barcode-line"></i> Generate
                 </button>
             
-                    <select id="downloadFormat" class="input">
-                        <option value="png">PNG</option>
-                        <option value="svg">SVG</option>
-                        <option value="jpg">JPG</option>
-                    </select>
-                    <button id="downloadBtn" onclick="downloadBarcode()" class="button secondary" disabled>
-                       Download
-                    </button>
+                <select id="downloadFormat" class="input">
+                    <option value="png">PNG</option>
+                    <option value="svg">SVG</option>
+                    <option value="jpg">JPG</option>
+                </select>
+                <button id="downloadBtn" onclick="downloadBarcode()" class="button secondary" disabled>
+                   Download
+                </button>
             </div>
+        </div>
+    </div>
+
+    <!-- Information Sections -->
+    <div class="info-section">
+        <h2>What is a Barcode?</h2>
+        <p>A barcode is a method of representing data in a visual, machine-readable form. Unlike QR codes, traditional barcodes store data in a series of parallel lines of varying widths and spacings. They are essential for inventory management, retail operations, and product identification.</p>
+        
+        <div class="info-grid">
+            <div class="info-card">
+                <h3><i class="ri-bar-chart-box-line"></i> Key Benefits</h3>
+                <ul>
+                    <li>Fast and accurate data entry</li>
+                    <li>Reduced human error</li>
+                    <li>Improved inventory tracking</li>
+                    <li>Cost-effective implementation</li>
+                    <li>Universal compatibility</li>
+                </ul>
+            </div>
+            
+            <div class="info-card">
+                <h3><i class="ri-tools-line"></i> Common Uses</h3>
+                <ul>
+                    <li>Product identification</li>
+                    <li>Inventory management</li>
+                    <li>Point of sale systems</li>
+                    <li>Asset tracking</li>
+                    <li>Document management</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-section">
+        <h2>Types of Barcodes</h2>
+        <p>Different barcode formats serve different purposes. Choose the right type based on your specific needs:</p>
+        
+        <div class="barcode-types">
+            <div class="barcode-type">
+                <h4>Code 128</h4>
+                <p>High-density linear barcode, ideal for general-purpose use and logistics.</p>
+            </div>
+            
+            <div class="barcode-type">
+                <h4>EAN-13</h4>
+                <p>Standard retail barcode used worldwide for consumer products.</p>
+            </div>
+            
+            <div class="barcode-type">
+                <h4>UPC</h4>
+                <p>Universal Product Code, commonly used in North American retail.</p>
+            </div>
+            
+            <div class="barcode-type">
+                <h4>Code 39</h4>
+                <p>Versatile format supporting letters, numbers, and special characters.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-section">
+        <h2>Best Practices</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <h3><i class="ri-check-line"></i> Design Tips</h3>
+                <ul>
+                    <li>Maintain high contrast colors</li>
+                    <li>Include adequate quiet zones</li>
+                    <li>Choose appropriate size</li>
+                    <li>Test scanning before printing</li>
+                    <li>Use quality printing materials</li>
+                </ul>
+            </div>
+            
+            <div class="info-card">
+                <h3><i class="ri-error-warning-line"></i> Common Mistakes</h3>
+                <ul>
+                    <li>Poor print quality</li>
+                    <li>Insufficient contrast</li>
+                    <li>Wrong barcode type selection</li>
+                    <li>Missing quiet zones</li>
+                    <li>Incorrect data format</li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <div id="footer-placeholder"></div>
